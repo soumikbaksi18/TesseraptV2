@@ -1,10 +1,10 @@
 # 🚀 Tesserapt - AI-Powered DeFi Investment Platform
 
 <div align="center">
-  <img src="staking-application/src/assets/Tesseraptlogo.png" alt="Tesserapt Logo" width="200"/>
-  
+
+<img width="1158" height="653" alt="image" src="https://github.com/user-attachments/assets/f8db4cc5-0394-48da-a4e1-69485e74ccdf" />
+
   [![Demo Video](https://img.shields.io/badge/📹-Watch%20Demo-blue?style=for-the-badge)](https://drive.google.com/drive/folders/1mrCr7DbDFzfmmtmVIcTFToJWRDMvoD7C)
-  [![Live Demo](https://img.shields.io/badge/🌐-Live%20Demo-green?style=for-the-badge)](#live-demo)
   [![Documentation](https://img.shields.io/badge/📚-Documentation-orange?style=for-the-badge)](#documentation)
 </div>
 
@@ -14,7 +14,7 @@
 
 ### 🌟 Key Features
 
-- **🧠 AI Investment Advisor**: LSTM-based forecasting for optimal PT/YT token splits
+- **🧠 AI Investment Advisor**: LSTM-based forecasting for optimal returns.
 - **💧 Liquidity Pool Recommendations**: AI-powered analysis of the best LP opportunities
 - **📊 Real-time Market Data**: Live trading pairs and market analytics
 - **🔗 Aptos Integration**: Native support for Aptos blockchain and Petra wallet
@@ -24,16 +24,14 @@
 ## 🖼️ Screenshots
 
 ### AI Investment Advisor Modal
-![AI Investment Advisor]
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1b03cb50-8e98-4aca-9a21-465e71fc6347" />
-
+![Lednding & Borrowing in Aptos]
+<img width="1908" height="963" alt="aptos-s1" src="https://github.com/user-attachments/assets/84bd14bf-3795-4bcd-a50d-33b757ca5321" />
 
 *Choose between LP Pool Recommendations and PT/YT Split Optimization with AI-powered insights*
 
-### Trading Hub Dashboard
+### AI Staking and Trading
 ![Trading Hub]
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3fa61110-0b2e-4771-9e1e-506c51b3d5a3" />
-
 
 *Discover AI-powered investment opportunities and trade on live markets with real-time data*
 
