@@ -2,7 +2,8 @@
 
 <div align="center">
 
-<img width="1158" height="653" alt="image" src="https://github.com/user-attachments/assets/f8db4cc5-0394-48da-a4e1-69485e74ccdf" />
+<img width="1158" height="653" alt="image" src="https://github.com/user-attachments/assets/db0ea730-e455-4acb-94f5-44849124df77" />
+
 
   [![Demo Video](https://img.shields.io/badge/📹-Watch%20Demo-blue?style=for-the-badge)](https://drive.google.com/drive/folders/1mrCr7DbDFzfmmtmVIcTFToJWRDMvoD7C)
   [![Documentation](https://img.shields.io/badge/📚-Documentation-orange?style=for-the-badge)](#documentation)
@@ -10,36 +11,38 @@
 
 ## 🎯 Overview
 
-**Tesserapt** is a cutting-edge AI-powered DeFi investment platform that combines advanced machine learning algorithms with real-time market data to provide intelligent investment recommendations. Built on the Aptos blockchain, it offers users sophisticated tools for liquidity pool optimization, yield farming, and automated trading strategies.
+<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/41e411a0-ffa4-427b-aef5-69ee24f57c46" />
+
+**Tesserapt** is a cutting-edge AI-powered DeFi investment platform that combines advanced machine learning algorithms with real-time market data to provide intelligent investment recommendations. Built on the Aptos blockchain, it offers users sophisticated tools for lending, borrowing, staking, liquidity pool optimization, yield farming, and automated trading strategies.
 
 ### 🌟 Key Features
 
 - **🧠 AI Investment Advisor**: LSTM-based forecasting for optimal returns.
+- **🏦 Lending & Borrowing**: AI-enhanced collateral management and borrowing strategies
 - **💧 Liquidity Pool Recommendations**: AI-powered analysis of the best LP opportunities
 - **📊 Real-time Market Data**: Live trading pairs and market analytics
+- **📈 AI Staking & Trading Hub**: Smart staking allocation and predictive trading signals
 - **🔗 Aptos Integration**: Native support for Aptos blockchain and Petra wallet
-- **📈 Advanced Analytics**: Comprehensive portfolio tracking and performance metrics
 - **🎨 Modern UI/UX**: Sleek, responsive interface with dark mode support
 
 ## 🖼️ Screenshots
 
-### AI Investment Advisor Modal
-![Lednding & Borrowing in Aptos]
-<img width="1908" height="963" alt="aptos-s1" src="https://github.com/user-attachments/assets/84bd14bf-3795-4bcd-a50d-33b757ca5321" />
+### Lending & Borrowing in Aptos
+<img width="1908" height="963" alt="aptos-s1" src="https://github.com/user-attachments/assets/e2d089b6-9017-494c-949f-852734b62cbd" />
 
-*Choose between LP Pool Recommendations and PT/YT Split Optimization with AI-powered insights*
+
+*Supply, borrow, and manage risk with AI-powered insights*
 
 ### AI Staking and Trading
-![Trading Hub]
-<img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/3fa61110-0b2e-4771-9e1e-506c51b3d5a3" />
+<img width="1919" height="855" alt="aptos-s2" src="https://github.com/user-attachments/assets/15c4c341-3567-4a4c-b27a-bccdf8c149d0" />
 
-*Discover AI-powered investment opportunities and trade on live markets with real-time data*
+
+*Smart staking allocation, predictive trading signals, and auto-trading strategies all in one place*
 
 ### Cyberpunk Cityscape
-![Cyberpunk Cityscape]
-<img width="1280" height="607" alt="image" src="https://github.com/user-attachments/assets/cea5cad5-a506-4a32-96d9-84ea739d3e62" />
+<img width="1423" height="792" alt="image" src="https://github.com/user-attachments/assets/e71fe0ef-663b-44c8-904f-c75424e93677" />
 
-Unity Metaverse game repo : https://github.com/notoriousraj/TeseraptMetaVerse
+<img width="1716" height="961" alt="image" src="https://github.com/user-attachments/assets/10e7d9aa-62e7-46a8-a156-dd40e6acdde5" />
 
 *Futuristic interface design with neon-lit aesthetics and advanced AI navigation*
 
@@ -65,108 +68,41 @@ The project consists of two main components:
 - **Data Source**: DeFiLlama API integration
 - **Deployment**: Render.com ready
 
-## 🚀 Quick Start
-
-### Prerequisites
-
-- Node.js 18+ and npm/yarn
-- Python 3.8+
-- Git
-
-### Frontend Setup
-
-```bash
-# Clone the repository
-git clone <repository-url>
-cd tesserapt/staking-application
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-```
-
-### Backend Setup
-
-```bash
-# Navigate to AI agents directory
-cd ../ai-agents
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Start the API server
-python main.py
-```
-
-## 📁 Project Structure
-
-```
-tesserapt/
-├── staking-application/          # Frontend React application
-│   ├── src/
-│   │   ├── components/          # Reusable UI components
-│   │   │   ├── dashboard/       # Dashboard-specific components
-│   │   │   └── layout/          # Layout components
-│   │   ├── hooks/               # Custom React hooks
-│   │   │   └── contracts/       # Blockchain interaction hooks
-│   │   ├── pages/               # Application pages
-│   │   ├── api/                 # API integration layer
-│   │   └── lib/                 # Utilities and configurations
-│   └── package.json
-├── ai-agents/                   # Backend AI services
-│   ├── main.py                  # FastAPI application
-│   ├── lstm.py                  # LSTM model implementation
-│   ├── defillama.py            # DeFiLlama API integration
-│   └── requirements.txt
-└── README.md
-```
-
-## 🔧 Key Technologies
-
-### Frontend Stack
-- **React 19** - Latest React with concurrent features
-- **TypeScript** - Type-safe development
-- **Vite** - Fast build tool and dev server
-- **Tailwind CSS** - Utility-first CSS framework
-- **Radix UI** - Accessible component primitives
-- **React Query** - Server state management
-- **Aptos SDK** - Blockchain integration
-
-### Backend Stack
-- **FastAPI** - Modern Python web framework
-- **LSTM Networks** - Deep learning for price prediction
-- **DeFiLlama API** - Real-time DeFi data
-- **NumPy & Scikit-learn** - Data processing and ML
-- **Pydantic** - Data validation
-- **Uvicorn** - ASGI server
-
-## 🎯 Core Features
+## 🎯 Core Features (Expanded)
 
 ### 1. AI Investment Advisor
-- **LSTM Forecasting**: Advanced neural networks predict token price movements
-- **Risk Assessment**: Personalized recommendations based on risk profiles
-- **PT/YT Optimization**: Optimal Principal Token and Yield Token allocation
+- **LSTM Forecasting**: Advanced neural networks predict token price movements.
+- **Risk Assessment**: Personalized recommendations based on user-defined risk profiles.
+- **PT/YT Optimization**: Intelligent allocation between Principal Tokens and Yield Tokens.
 
-### 2. Liquidity Pool Recommendations
-- **Pool Analysis**: Comprehensive analysis of LP opportunities
-- **APY Optimization**: Maximize returns through intelligent pool selection
-- **Risk Profiling**: Conservative, moderate, and aggressive strategies
+### 2. Lending & Borrowing on Aptos
+- **Decentralized Lending Markets**: Supply assets to earn yield, or borrow against your collateral with seamless Aptos-native integration.
+- **AI-Backed Credit Scoring**: ML models analyze wallet history, collateral volatility, and liquidity trends to offer **dynamic borrow limits** and **optimized interest rates**.
+- **Collateral Optimization**: AI continuously monitors collateral-to-debt ratios and alerts users before liquidation risks.
+- **Multi-Asset Support**: Deposit APT, stablecoins, or ecosystem tokens into lending pools with adaptive APY curves.
+- **Flash Loan Ready**: Future-proof architecture to enable AI-driven arbitrage and advanced trading strategies.
 
-### 3. Live Market Data
-- **Real-time Prices**: Live cryptocurrency price feeds
-- **Market Analytics**: Advanced charting and technical analysis
-- **Trading Pairs**: Support for multiple trading pairs
+### 3. AI-Powered Staking & Trading Hub
+- **Smart Staking Allocator**: AI agents recommend staking pools with the best **APY-to-risk ratios** across Aptos and partner protocols.
+- **Dynamic Rebalancing**: Portfolios are automatically adjusted when staking rewards or market conditions shift.
+- **Predictive Trading Signals**: LSTM-based AI provides **buy/sell confidence scores** for supported tokens.
+- **Auto-Trading Strategies**: Execute trades with AI-powered bots balancing **short-term opportunities** and **long-term yield**.
+- **Unified Hub**: Stake, lend, borrow, and trade in one dashboard with **real-time portfolio analytics** and **P&L breakdowns**.
 
-### 4. Aptos Integration
-- **Petra Wallet**: Native wallet integration
-- **Smart Contracts**: DeFi protocol interactions
-- **Transaction Management**: Seamless blockchain transactions
+### 4. Liquidity Pool Recommendations
+- **Pool Analysis**: AI-driven screening of LP opportunities across Aptos DEXs.
+- **APY Optimization**: Suggests pools with the highest sustainable returns.
+- **Risk Profiling**: AI classifies pools as conservative, moderate, or aggressive.
+
+### 5. Live Market Data
+- **Real-time Prices**: Live price feeds for Aptos tokens and top crypto assets.
+- **Market Analytics**: Technical indicators and charting powered by AI.
+- **Trading Pairs**: AI-driven pair discovery to catch early momentum shifts.
+
+### 6. Aptos Integration
+- **Petra Wallet**: Native wallet integration.
+- **Smart Contracts**: DeFi protocol interactions.
+- **Transaction Management**: Seamless blockchain transactions.
 
 ## 📊 API Endpoints
 
