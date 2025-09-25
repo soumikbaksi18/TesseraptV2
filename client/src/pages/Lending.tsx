@@ -10,20 +10,15 @@ import {
   History,
   Settings,
   Info,
-  ArrowUpDown,
-  DollarSign,
-  Percent,
-  Clock
+  Percent
 } from 'lucide-react';
+import { ContractInitializer } from '@/components/dashboard/ContractInitializer';
 import { usePetraWallet } from '@/contexts/PetraWalletContext';
 import { 
   useAptosLendingDashboard,
-  useAptosCollateralInfo,
   useAptosDepositCollateral,
-  useAptosWithdrawCollateral,
   useAptosCreateLoan,
-  useAptosRepayLoan,
-  useAptosLendingTokenBalances
+  useAptosRepayLoan
 } from '@/hooks/contracts/useAptosLending';
 
 // Design System Colors
@@ -40,20 +35,21 @@ const colors = {
 };
 
 const Lending: React.FC = () => {
-  const { isConnected, walletAddress } = usePetraWallet();
+  const { isConnected } = usePetraWallet();
   const [activeTab, setActiveTab] = useState<'lend' | 'borrow' | 'positions'>('lend');
   const [collateralAmount, setCollateralAmount] = useState('');
   const [loanAmount, setLoanAmount] = useState('');
   const [selectedLTV, setSelectedLTV] = useState(30);
+  const [contractsInitialized, setContractsInitialized] = useState(false);
 
   // Real contract data
   const lendingDashboard = useAptosLendingDashboard();
-  const collateralInfo = useAptosCollateralInfo();
-  const tokenBalances = useAptosLendingTokenBalances();
+  // const collateralInfo = useAptosCollateralInfo();
+  // const tokenBalances = useAptosLendingTokenBalances();
   
   // Contract interactions
   const depositCollateral = useAptosDepositCollateral();
-  const withdrawCollateral = useAptosWithdrawCollateral();
+  // const withdrawCollateral = useAptosWithdrawCollateral();
   const createLoan = useAptosCreateLoan();
   const repayLoan = useAptosRepayLoan();
 
@@ -68,7 +64,7 @@ const Lending: React.FC = () => {
       45: 8,   // 8% for 45% LTV
       60: 10,  // 10% for 60% LTV
     },
-    userLoans: [],
+    activeLoans: [],
     userCollateral: '0.00',
   };
 
@@ -79,7 +75,19 @@ const Lending: React.FC = () => {
   ];
 
   const formatCurrency = (amount: string | number) => {
-    return `$${parseFloat(amount.toString()).toFixed(2)}`;
+    const numAmount = parseFloat(amount?.toString() || '0');
+    if (isNaN(numAmount) || numAmount === 0) return '$0.00';
+    
+    // Handle very large numbers
+    if (numAmount >= 1e9) {
+      return `$${(numAmount / 1e9).toFixed(1)}B`;
+    } else if (numAmount >= 1e6) {
+      return `$${(numAmount / 1e6).toFixed(1)}M`;
+    } else if (numAmount >= 1e3) {
+      return `$${(numAmount / 1e3).toFixed(1)}K`;
+    }
+    
+    return `$${numAmount.toFixed(2)}`;
   };
 
   const calculateMaxLoan = (collateral: number, ltv: number) => {
@@ -89,6 +97,7 @@ const Lending: React.FC = () => {
   const getHealthFactorColor = (healthFactor: string) => {
     if (healthFactor === '∞') return colors.success;
     const hf = parseFloat(healthFactor);
+    if (isNaN(hf)) return colors.success; // Default to success for invalid values
     if (hf > 2) return colors.success;
     if (hf > 1.5) return colors.warning;
     return colors.danger;
@@ -108,18 +117,18 @@ const Lending: React.FC = () => {
     }
   };
 
-  const handleWithdrawCollateral = async () => {
-    if (!collateralAmount || !isConnected) return;
-    
-    try {
-      const amountInOctas = (parseFloat(collateralAmount) * 100000000).toString();
-      await withdrawCollateral.mutateAsync({ amount: amountInOctas });
-      setCollateralAmount('');
-      console.log('Collateral withdrawn successfully');
-    } catch (error) {
-      console.error('Failed to withdraw collateral:', error);
-    }
-  };
+  // const handleWithdrawCollateral = async () => {
+  //   if (!collateralAmount || !isConnected) return;
+  //   
+  //   try {
+  //     const amountInOctas = (parseFloat(collateralAmount) * 100000000).toString();
+  //     await withdrawCollateral.mutateAsync({ amount: amountInOctas });
+  //     setCollateralAmount('');
+  //     console.log('Collateral withdrawn successfully');
+  //   } catch (error) {
+  //     console.error('Failed to withdraw collateral:', error);
+  //   }
+  // };
 
   const handleCreateLoan = async () => {
     if (!loanAmount || !isConnected) return;
@@ -148,7 +157,9 @@ const Lending: React.FC = () => {
 
   // Format token amounts for display
   const formatTokenAmount = (amount: string, decimals: number = 8) => {
-    return (parseInt(amount) / Math.pow(10, decimals)).toFixed(4);
+    const numAmount = parseFloat(amount || '0');
+    if (isNaN(numAmount) || numAmount === 0) return '0.0000';
+    return (numAmount / Math.pow(10, decimals)).toFixed(4);
   };
 
   if (!isConnected) {
@@ -169,6 +180,23 @@ const Lending: React.FC = () => {
             Connect Wallet
           </button>
         </div>
+      </div>
+    );
+  }
+
+  // Check if contracts are initialized (simple check - if lending dashboard has errors, contracts likely need init)
+  const needsInitialization = lendingDashboard.error?.message?.includes('RESOURCE_DOES_NOT_EXIST') || 
+                              lendingDashboard.error?.message?.includes('not found') ||
+                              (!contractsInitialized && !lendingDashboard.data);
+
+  if (needsInitialization) {
+    return (
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold" style={{ color: colors.light }}>Lending & Borrowing</h1>
+        </div>
+        
+        <ContractInitializer onInitialized={() => setContractsInitialized(true)} />
       </div>
     );
   }
@@ -207,7 +235,7 @@ const Lending: React.FC = () => {
             <div className="ml-4">
               <p className="text-sm font-medium text-white/70">Total Collateral</p>
               <p className="text-2xl font-bold text-white">
-                {lendingDashboard.isLoading ? '...' : `${formatTokenAmount(lendingData.totalCollateral)} APT`}
+                {lendingDashboard.isLoading ? '...' : `${formatTokenAmount(lendingData.totalCollateral, 8)} APT`}
               </p>
             </div>
           </div>
@@ -321,7 +349,7 @@ const Lending: React.FC = () => {
                   {[25, 50, 75, 100].map((percentage) => (
                     <button
                       key={percentage}
-                      onClick={() => setCollateralAmount((parseFloat(lendingData.userCollateral) * percentage / 100).toString())}
+                      onClick={() => setCollateralAmount((parseFloat(lendingData.totalCollateral) / 100000000 * percentage / 100).toString())}
                       className="flex-1 py-2 px-3 text-sm font-medium rounded-lg border border-white/20 text-white/70 hover:text-white hover:border-cyan-400/50 transition-colors"
                     >
                       {percentage}%
@@ -335,7 +363,10 @@ const Lending: React.FC = () => {
                     <span className="text-sm font-medium" style={{ color: colors.success }}>You'll receive</span>
                   </div>
                   <div className="text-lg font-bold text-white">
-                    {collateralAmount || '0.00'} ctrlBTC tokens
+                    {collateralAmount && !isNaN(parseFloat(collateralAmount)) 
+                      ? `${parseFloat(collateralAmount).toFixed(4)} ctrlBTC tokens`
+                      : '0.0000 ctrlBTC tokens'
+                    }
                   </div>
                   <div className="text-xs text-white/60 mt-1">
                     1 BTC = 1 ctrlBTC (1:1 ratio)
@@ -433,7 +464,7 @@ const Lending: React.FC = () => {
                   <div className="space-y-1 text-sm">
                     <div className="flex justify-between">
                       <span className="text-white/60">Max Loan Amount:</span>
-                      <span className="text-white">{formatCurrency(calculateMaxLoan(parseFloat(lendingData.userCollateral), selectedLTV))}</span>
+                      <span className="text-white">{formatCurrency(calculateMaxLoan(parseFloat(lendingData.totalCollateral) / 100000000, selectedLTV))}</span>
                     </div>
                     <div className="flex justify-between">
                       <span className="text-white/60">Interest Rate:</span>
@@ -475,7 +506,7 @@ const Lending: React.FC = () => {
                 </div>
               </div>
 
-              {lendingData.activeLoans.length === 0 ? (
+              {(lendingData.activeLoans || []).length === 0 ? (
                 <div className="text-center py-12">
                   <CreditCard className="w-16 h-16 mx-auto mb-4 text-white/30" />
                   <p className="text-white/60 mb-2">No active loans</p>
@@ -483,7 +514,7 @@ const Lending: React.FC = () => {
                 </div>
               ) : (
                 <div className="space-y-4">
-                  {lendingData.activeLoans.map((loan) => (
+                  {(lendingData.activeLoans || []).map((loan: any) => (
                     <div key={loan.id} className="border border-white/10 rounded-lg p-4">
                       <div className="flex justify-between items-start mb-4">
                         <div>

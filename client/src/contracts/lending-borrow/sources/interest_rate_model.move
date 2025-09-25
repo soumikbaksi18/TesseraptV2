@@ -305,4 +305,11 @@ module btc_lending_platform::interest_rate_model {
         set_rate(new_admin_signer, 35, 600);
         assert!(get_rate(35) == 600, 1);
     }
+
+    /// Entry function to initialize interest rate model (for frontend demo)
+    public entry fun initialize_entry(
+        admin: &signer
+    ) {
+        initialize(admin);
+    }
 }

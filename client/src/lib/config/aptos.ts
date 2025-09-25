@@ -24,7 +24,7 @@ export const APTOS_CONTRACT_ADDRESSES = {
   SIMPLE_AMM: `${CONTRACT_ADDRESS}::simple_amm`,
   YT_AUTO_CONVERTER: `${CONTRACT_ADDRESS}::yt_auto_converter`,
   
-  // Lending Contracts (DEPLOYED but NOT INITIALIZED)
+  // Lending Contracts (DEPLOYED - Ready for initialization)
   INTEREST_RATE_MODEL: `${CONTRACT_ADDRESS}::interest_rate_model`,
   COLLATERAL_VAULT: `${CONTRACT_ADDRESS}::collateral_vault`,
   LOAN_MANAGER: `${CONTRACT_ADDRESS}::loan_manager`,
@@ -74,6 +74,28 @@ export const APTOS_FUNCTIONS = {
     INITIALIZE: "initialize",
     EXECUTE_CONVERSION: "execute_conversion",
     ADD_MATURITY: "add_maturity",
+  },
+  
+  // Lending Functions
+  COLLATERAL_VAULT: {
+    INITIALIZE: "initialize",
+    DEPOSIT_COLLATERAL: "deposit_collateral",
+    WITHDRAW_COLLATERAL: "withdraw_collateral",
+    LOCK_COLLATERAL: "lock_collateral",
+    UNLOCK_COLLATERAL: "unlock_collateral",
+  },
+  
+  LOAN_MANAGER: {
+    INITIALIZE: "initialize",
+    CREATE_LOAN: "create_loan",
+    REPAY_LOAN: "repay_loan",
+    LIQUIDATE_LOAN: "liquidate_loan",
+  },
+  
+  INTEREST_RATE_MODEL: {
+    INITIALIZE: "initialize",
+    GET_INTEREST_RATE: "get_interest_rate",
+    UPDATE_INTEREST_RATE: "update_interest_rate",
   },
 } as const;
 

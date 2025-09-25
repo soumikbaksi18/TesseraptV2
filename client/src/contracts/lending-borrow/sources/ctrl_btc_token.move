@@ -216,4 +216,9 @@ module btc_lending_platform::ctrl_btc_token {
         assert!(final_supply == initial_supply - 500, 1);
         assert!(balance(vault_address) == 500, 2);
     }
+
+    /// Entry function to initialize ctrlBTC token (for demo purposes)
+    public entry fun initialize_entry(admin: &signer, collateral_vault_address: address) {
+        initialize(admin, collateral_vault_address);
+    }
 }

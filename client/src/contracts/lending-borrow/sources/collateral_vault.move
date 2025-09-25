@@ -314,16 +314,19 @@ module btc_lending_platform::collateral_vault {
     }
 
     /// Get user's total collateral balance
+    #[view]
     public fun get_user_collateral(user_address: address): u64 acquires CollateralVault {
         get_user_collateral_internal(user_address)
     }
 
     /// Get user's locked collateral balance
+    #[view]
     public fun get_user_locked_collateral(user_address: address): u64 acquires CollateralVault {
         get_user_locked_internal(user_address)
     }
 
     /// Get user's available collateral (total - locked)
+    #[view]
     public fun get_user_available_collateral(user_address: address): u64 acquires CollateralVault {
         let total = get_user_collateral_internal(user_address);
         let locked = get_user_locked_internal(user_address);
@@ -335,12 +338,14 @@ module btc_lending_platform::collateral_vault {
     }
 
     /// Get total collateral in the vault
+    #[view]
     public fun get_total_vault_collateral(): u64 acquires CollateralVault {
         let vault = borrow_global<CollateralVault>(@btc_lending_platform);
         vault.total_vault_collateral
     }
 
     /// Get total locked collateral across all users
+    #[view]
     public fun get_total_locked_collateral(): u64 acquires CollateralVault {
         let _vault = borrow_global<CollateralVault>(@btc_lending_platform);
         let total_locked = 0u64;
@@ -532,5 +537,33 @@ module btc_lending_platform::collateral_vault {
         initialize(admin, loan_manager);
         
         verify_loan_manager(non_loan_manager); // Should fail
+    }
+
+    //
+    // ENTRY FUNCTIONS FOR FRONTEND DEMO
+    //
+    
+    /// Entry function wrapper for deposit_collateral (for frontend calls)
+    public entry fun deposit_collateral_entry(
+        user: &signer,
+        amount: u64
+    ) acquires CollateralVault {
+        deposit_collateral(user, amount);
+    }
+
+    /// Entry function wrapper for withdraw_collateral (for frontend calls)  
+    public entry fun withdraw_collateral_entry(
+        user: &signer,
+        amount: u64
+    ) acquires CollateralVault {
+        withdraw_collateral(user, amount);
+    }
+
+    /// Entry function to initialize collateral vault (for frontend demo)
+    public entry fun initialize_entry(
+        admin: &signer
+    ) {
+        let admin_address = signer::address_of(admin);
+        initialize(admin, admin_address); // Use admin as temp loan manager
     }
 }

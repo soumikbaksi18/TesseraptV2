@@ -805,4 +805,36 @@ module btc_lending_platform::loan_manager {
         
         verify_loan_active(999); // Should fail - loan doesn't exist
     }
+
+    //
+    // ENTRY FUNCTIONS FOR FRONTEND DEMO
+    //
+    
+    /// Entry function for users to create their own loans (simplified for demo)
+    public entry fun create_loan_entry(
+        user: &signer,
+        collateral_amount: u64,
+        ltv_ratio: u64
+    ) acquires LoanManager {
+        let user_address = signer::address_of(user);
+        create_loan(user, user_address, collateral_amount, ltv_ratio);
+    }
+
+    /// Entry function for users to repay their own loans (simplified for demo)  
+    public entry fun repay_loan_entry(
+        user: &signer,
+        loan_id: u64,
+        repayment_amount: u64
+    ) acquires LoanManager {
+        let user_address = signer::address_of(user);
+        repay_loan(user, user_address, loan_id, repayment_amount);
+    }
+
+    /// Entry function to initialize loan manager (for frontend demo)
+    public entry fun initialize_entry(
+        admin: &signer
+    ) {
+        let admin_address = signer::address_of(admin);
+        initialize(admin, admin_address, admin_address); // Use admin address for both vault and interest rate model
+    }
 }

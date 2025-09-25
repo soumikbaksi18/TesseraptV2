@@ -250,4 +250,9 @@ module btc_lending_platform::ln_btc_token {
         assert!(balance(borrower_address) == 400, 2);
         assert!(total_supply() == 400, 3);
     }
+
+    /// Entry function to initialize lnBTC token (for demo purposes)
+    public entry fun initialize_entry(admin: &signer, loan_manager_address: address) {
+        initialize(admin, loan_manager_address);
+    }
 }
