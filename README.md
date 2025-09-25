@@ -11,8 +11,6 @@
 
 ## 🎯 Overview
 
-<img width="500" height="500" alt="image" src="https://github.com/user-attachments/assets/41e411a0-ffa4-427b-aef5-69ee24f57c46" />
-
 **Tesserapt** is a cutting-edge AI-powered DeFi investment platform that combines advanced machine learning algorithms with real-time market data to provide intelligent investment recommendations. Built on the Aptos blockchain, it offers users sophisticated tools for lending, borrowing, staking, liquidity pool optimization, yield farming, and automated trading strategies.
 
 ### 🌟 Key Features
